@@ -1,15 +1,20 @@
 var dataset = require('./dataset.json');
+var bankBalances = dataset.bankBalances.map((array) => {
+  array.amount = parseFloat(array.amount);
+  return array;
+});
 
 /*
   create an array with accounts from bankBalances that are
   greater than 100000.00
   assign the resulting array to `hundredThousandairs`
 */
+
 function getBourgeois(array){
   return array.amount >= 100000;
 }
 
-var hundredThousandairs = dataset.bankBalances.filter(getBourgeois);
+var hundredThousandairs = bankBalances.filter(getBourgeois);
 
 /*
   set a new key for each object in bankBalances named `rounded`
@@ -23,7 +28,7 @@ var hundredThousandairs = dataset.bankBalances.filter(getBourgeois);
   assign the resulting array to `roundedDollar`
 */
 
-var roundedDollar = dataset.bankBalances
+var roundedDollar = bankBalances
   .map((array) => {
     return {
       amount: array.amount,
@@ -45,7 +50,8 @@ var roundedDollar = dataset.bankBalances
     }
   assign the resulting array to `roundedDime`
 */
-var roundedDime = dataset.bankBalances
+
+var roundedDime = bankBalances
   .map((array) => {
     return {
       amount: array.amount,
@@ -58,7 +64,10 @@ var roundedDime = dataset.bankBalances
   });
 
 // set sumOfBankBalances to the sum of all amounts in bankBalances
-var sumOfBankBalances = null;
+
+var sumOfBankBalances = Math.round(100*bankBalances.reduce((accumulated, current) => {
+  return accumulated + current.amount;
+}, 0))/100;
 
 /*
   set sumOfInterests to the sum of the 18.9% interest
@@ -72,6 +81,7 @@ var sumOfBankBalances = null;
     Delaware
   the result should be rounded to the nearest cent
  */
+
 var sumOfInterests = null;
 
 /*
