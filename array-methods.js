@@ -5,7 +5,11 @@ var dataset = require('./dataset.json');
   greater than 100000.00
   assign the resulting array to `hundredThousandairs`
 */
-var hundredThousandairs = null;
+function getHTs(array){
+  return array.amount >= 100000;
+}
+
+var hundredThousandairs = dataset.bankBalances.filter(getHTs);
 
 /*
   set a new key for each object in bankBalances named `rounded`
