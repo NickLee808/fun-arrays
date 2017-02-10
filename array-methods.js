@@ -5,11 +5,11 @@ var dataset = require('./dataset.json');
   greater than 100000.00
   assign the resulting array to `hundredThousandairs`
 */
-function getHTs(array){
+function getBourgeois(array){
   return array.amount >= 100000;
 }
 
-var hundredThousandairs = dataset.bankBalances.filter(getHTs);
+var hundredThousandairs = dataset.bankBalances.filter(getBourgeois);
 
 /*
   set a new key for each object in bankBalances named `rounded`
@@ -22,7 +22,18 @@ var hundredThousandairs = dataset.bankBalances.filter(getHTs);
     }
   assign the resulting array to `roundedDollar`
 */
-var roundedDollar = null;
+
+var roundedDollar = dataset.bankBalances
+  .map((array) => {
+    return {
+      amount: array.amount,
+      state: array.state,
+    };
+  })
+  .map((array) => {
+    array.rounded = Math.round(array.amount);
+    return array;
+  });
 
 /*
   set a the `amount` value for each object in bankBalances
@@ -34,7 +45,17 @@ var roundedDollar = null;
     }
   assign the resulting array to `roundedDime`
 */
-var roundedDime = null;
+var roundedDime = dataset.bankBalances
+  .map((array) => {
+    return {
+      amount: array.amount,
+      state: array.state,
+    };
+  })
+  .map((array) => {
+    array.amount = Math.round(10*array.amount)/10;
+    return array;
+  });
 
 // set sumOfBankBalances to the sum of all amounts in bankBalances
 var sumOfBankBalances = null;
