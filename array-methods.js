@@ -98,7 +98,7 @@ var sumOfInterests = null;
     Delaware
   the result should be rounded to the nearest cent
  */
-var sumOfHighInterests = null;
+var sumOfHighInterests = Object.keys(stateSums)
 
 /*
   aggregate the sum of bankBalance amounts
@@ -108,7 +108,16 @@ var sumOfHighInterests = null;
     and the value is the sum of all amounts from that state
       the value must be rounded to the nearest cent
  */
-var stateSums = null;
+
+.filter((state) => ['WI', 'IL', 'WY', 'OH', 'GA', 'DE'].indexOf(state) === -1);
+
+var stateSums = dataset.bankBalances.reduce((accounts, currentAccount) => {
+  if (!accounts.hasOwnProperty(currentAccount.state)){
+    accounts[currentAccount.state] = 0;
+  }
+  accounts[currentAccount.state] += parseFloat(currentAccount.amount);
+  accounts[currentAccount.state] = parseFloat(currentAccount.amount);
+});
 
 /*
   set lowerSumStates to an array containing
@@ -146,8 +155,8 @@ var areStatesInHigherStateSum = null;
   set anyStatesInHigherStateSum to be true if
     any of these states have a sum of account values
       greater than 2,550,000
-    Wisconsin
-    Illinois
+    Wisconsi
+n    Illinois
     Wyoming
     Ohio
     Georgia
